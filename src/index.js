@@ -14,14 +14,16 @@ function ProductInterface(props) {
 	return (
 		<div>
 			< SearchBar />
-			< ProductTable />
+			< ProductTable json_api={props.json_api} />
 		</div>
 	);
 }
 
 function APP(props) {
 	return (
-		< ProductInterface />
+		<>
+			< ProductInterface json_api={props.json_api} />
+		</>
 	);
 }
 
