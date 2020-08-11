@@ -35,22 +35,21 @@ function ProductCategoryRow(props) {
 			categories.push(element.category);
 		}
 	})
+
 	return (
-		<>
-			{categories.map(category => {
-				return (
-					<>
-						<tr>
-							<td className='category' key={category}>{category}</td>
-						</tr>
-						<ProductCategoryElements
-							json_api={props.json_api}
-							category={category}
-						/>
-					</>
-				);
-			})}
-		</>
+		categories.map(category => {
+			return (
+				<>
+					<tr>
+						<td className='category' key={category}>{category}</td>
+					</tr>
+					<ProductCategoryElements
+						json_api={props.json_api}
+						category={category}
+					/>
+				</>
+			);
+		})
 	);
 }
 

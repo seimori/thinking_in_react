@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import SearchBar from './SearchBar';
@@ -11,10 +11,14 @@ import ProductTable from './ProductTable';
 // ==================================================
 
 function ProductInterface(props) {
+	const [json, setJson] = useState(props.json_api);
 	return (
 		<div>
-			< SearchBar />
-			< ProductTable json_api={props.json_api} />
+			< SearchBar
+				json={json}
+				setJson={setJson}
+			/>
+			< ProductTable json_api={json} />
 		</div>
 	);
 }
