@@ -1,4 +1,32 @@
 import React from 'react';
+import './index.css';
+
+function ProductCategoryElements(props) {
+	const outOfStock = element => {
+		return (element.stocked ?
+			null :
+			'out-of-stock'
+		);
+	}
+
+	return (
+		props.json_api.map(element => {
+			if (element.category === props.category) {
+				return (
+					<>
+						<tr key={element.name}>
+							<td className={outOfStock(element)}>{element.name}</td>
+							<td>{element.price}</td>
+						</tr>
+					</>
+				)
+			}
+			else {
+				return null;
+			}
+		})
+	);
+}
 
 function ProductCategoryRow(props) {
 	let categories = [];
@@ -10,7 +38,17 @@ function ProductCategoryRow(props) {
 	return (
 		<>
 			{categories.map(category => {
-				return <td key={category}>{category}</td>;
+				return (
+					<>
+						<tr>
+							<td className='category' key={category}>{category}</td>
+						</tr>
+						<ProductCategoryElements
+							json_api={props.json_api}
+							category={category}
+						/>
+					</>
+				);
 			})}
 		</>
 	);
@@ -19,17 +57,13 @@ function ProductCategoryRow(props) {
 function ProductTable(props) {
 	return (
 		<div>
-			<h1>ProductTable</h1>
-			<p>{JSON.stringify(props.json_api, null, 2)}</p>
 			<table>
 				<tbody>
 					<tr>
-						<th>Name</th>
-						<th>Price</th>
+						<td className='table-header'>Name</td>
+						<td className='table-header'>Price</td>
 					</tr>
-					<tr>
-						<ProductCategoryRow json_api={props.json_api} />
-					</tr>
+					<ProductCategoryRow json_api={props.json_api} />
 				</tbody>
 			</table>
 		</div>
